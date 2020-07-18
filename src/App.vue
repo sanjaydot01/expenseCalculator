@@ -1,32 +1,55 @@
 <template>
   <div id="app">
+    <div class="topnavbar">
+      <h5>sanjay.rayamajhee80@gmail.com</h5>
+    </div>
     <div id="nav">
+      <b-navbar toggleable="sm" type="dark" variant="dark">
+        <b-navbar-brand href="#">Expenses</b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item to="/">Home</b-nav-item>
+            <b-nav-item to="/create"> New Expense</b-nav-item>
+            <b-nav-item to="/about">Report</b-nav-item>
+          </b-navbar-nav>
+
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <b-navbar-nav>
+              <b-nav-item href="#">Sign Up</b-nav-item>
+              <b-nav-item href="#">Sign In</b-nav-item>
+            </b-navbar-nav>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
+
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <router-link to="/create">Create</router-link>
     </div>
     <router-view />
   </div>
 </template>
-
+<script>
+export default {};
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  padding: 0;
 }
 
-#nav {
-  padding: 30px;
+.topnavbar {
+  display: flex;
+  align-items: center;
+  min-height: 3vh;
+  background-color: rgb(255, 182, 47);
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.topnavbar h5 {
+  font-size: 14px;
+  margin: 0 55px;
+  justify-content: center;
 }
 </style>
