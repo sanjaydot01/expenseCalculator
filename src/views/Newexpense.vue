@@ -38,7 +38,7 @@ export default {
         return this.$store.state.formdate;
       },
       set(value) {
-        this.$store.commit("setExpenses", value);
+        this.$store.commit("setDate", value);
       },
     },
     formitem: {
@@ -46,7 +46,7 @@ export default {
         return this.$store.state.formitem;
       },
       set(value) {
-        this.$store.commit("setExpenses", value);
+        this.$store.commit("setItem", value);
       },
     },
     formamount: {
@@ -54,13 +54,13 @@ export default {
         return this.$store.state.formamount;
       },
       set(value) {
-        this.$store.commit("setExpenses", value);
+        this.$store.commit("setAmount", value);
       },
     },
     ...mapState(["title", "expenses"]),
   },
   methods: {
-    ...mapMutations(["addExpenses"]),
+    ...mapMutations(["addExpenses", "setDate", "setItem", "setAmount"]),
   },
 };
 </script>

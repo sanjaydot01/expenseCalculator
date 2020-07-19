@@ -5,13 +5,20 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    formdate: "",
+    formitem: "",
+    formamount: "",
     title: "Welcome To Expense Calculator",
-    expenses: [{ formdate: "", formitem: "", formamount: "" }],
+    expenses: [],
   },
   mutations: {
-    setExpenses(state, value) {
+    setDate(state, value) {
       state.formdate = value;
+    },
+    setItem(state, value) {
       state.formitem = value;
+    },
+    setAmount(state, value) {
       state.formamount = value;
     },
     addExpenses(state) {
@@ -21,6 +28,14 @@ export default new Vuex.Store({
         formamount: state.formamount,
       });
     },
+    deleteMe(state, expense) {
+      const deleteIndex = state.expenses.indexOf(expense);
+      state.expenses.splice(deleteIndex, 1);
+      console.log(deleteIndex);
+    },
+    editMe(){
+      console.log("Edit Me");
+    }
   },
   actions: {},
   modules: {},
