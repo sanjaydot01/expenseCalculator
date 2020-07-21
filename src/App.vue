@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="container">
+    <div >
       <div class="topnavbar">
         <h5>sanjay.rayamajhee80@gmail.com</h5>
       </div>

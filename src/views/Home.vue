@@ -2,8 +2,8 @@
   <div class="home">
     <h1>Welcome to Expense Calculator</h1>
     {{ dates() }}
-    <div class="container">
-      <div class="card">
+    <div class="content">
+     <div class="card">
         <img
           class="card-img-top"
           src="../assets/today1.jpg"
@@ -11,13 +11,10 @@
         />
         <div class="card-body">
           <p class="card-title">Today</p>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          <h1>Rs. {{ dates() }}</h1>
         </div>
       </div>
-      <div class="card">
+     <div class="card">
         <img
           class="card-img-top"
           src="../assets/yesterday4.jpg"
@@ -25,11 +22,7 @@
         />
         <div class="card-body">
           <p class="card-title">Yesterday</p>
-
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          <h1>Rs. {{ dates() }}</h1>
         </div>
       </div>
 
@@ -53,10 +46,7 @@
         />
         <div class="card-body">
           <p class="card-title">Last 30 Days</p>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          <h1>Rs. {{ dates() }}</h1>
         </div>
       </div>
 
@@ -119,19 +109,30 @@ export default {
 };
 </script>
 <style scoped>
+body {
+  background-image: url("../assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+</style>
+
+<style scoped>
 .home h1 {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
-.container {
+.content {
+  background-color: blue;
+  margin: 30px;
+  padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 50px;
 }
-.container .card {
+.content .card {
+
   width: 18rem;
   background-color: coral;
-  margin: 20px;
+  margin: auto;
   padding: 10px;
 }
 .card-title {

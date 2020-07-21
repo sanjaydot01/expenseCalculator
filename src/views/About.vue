@@ -1,5 +1,5 @@
 <template>
-  <div class="about container">
+  <div class="about ">
     <h1>List of Expenses</h1>
     <date-picker
       v-model="range"
@@ -9,8 +9,14 @@
       width="500"
       format="YYYY-MM-DD"
     ></date-picker>
-    {{ range }}
+    <button @click="datearrays()">Calculate</button>
+    <button @click="filtereddate()">Filter</button>
+
+    <hr />
     <li v-for="(rang, index) in range" :key="index">{{ rang }}</li>
+    <hr />
+    <h5>Date FNS</h5>
+    <hr />
 
     <table class="table">
       <thead>
@@ -30,9 +36,15 @@
           <td>{{ expense.formitem }}</td>
           <td>{{ expense.formamount }}</td>
           <td>
-            <button v-on:click="editMe(expense)">Edit</button>
+            <button class="btn btn-success" v-on:click="editMe(expense)">
+              Edit
+            </button>
           </td>
-          <td><button v-on:click="deleteMe(expense)">Delete</button></td>
+          <td>
+            <button class="btn btn-danger" v-on:click="deleteMe(expense)">
+              Delete
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -50,6 +62,8 @@
 </template>
 
 <script>
+import { formatISO } from "date-fns";
+import { eachDayOfInterval } from "date-fns";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 import { mapMutations, mapState } from "vuex";
@@ -68,7 +82,27 @@ export default {
   },
   methods: {
     ...mapMutations(["deleteMe", "editMe"]),
-    datearrays: {},
+    datearrays: function() {
+      var startdate = this.range[0];
+      var enddate = this.range[1];
+
+      var result = eachDayOfInterval({
+        start: new Date(startdate),
+        end: new Date(enddate),
+      });
+
+      const final = result.map((resultDate) => {
+        return formatISO(new Date(resultDate), { representation: "date" });
+      });
+      console.log(final);
+    },
+    filtereddate: function() {
+      const filteredexpense = this.expenses.filter((expense) => {
+       console.log(expense.formdate);
+       return expense.formdate == "2020-07-05";
+      });
+      console.log(filteredexpense);
+    },
   },
 };
 </script>
