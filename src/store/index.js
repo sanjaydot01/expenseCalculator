@@ -33,9 +33,9 @@ export default new Vuex.Store({
       state.expenses.splice(deleteIndex, 1);
       console.log(deleteIndex);
     },
-    editMe(){
+    editMe() {
       console.log("Edit Me");
-    }
+    },
   },
   actions: {},
   modules: {},

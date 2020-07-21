@@ -1,34 +1,33 @@
 <template>
   <div id="app">
-    <div class="topnavbar">
-      <h5>sanjay.rayamajhee80@gmail.com</h5>
-    </div>
-    <div id="nav">
-      <b-navbar toggleable="sm" type="dark" variant="dark">
-        <b-navbar-brand href="#">Expenses</b-navbar-brand>
+    <div class="container">
+      <div class="topnavbar">
+        <h5>sanjay.rayamajhee80@gmail.com</h5>
+      </div>
 
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <nav id="nav">
+        <b-navbar toggleable="sm" type="dark" variant="dark">
+          <b-navbar-brand href="#">Expenses</b-navbar-brand>
 
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
-            <b-nav-item to="/">Home</b-nav-item>
-            <b-nav-item to="/create"> New Expense</b-nav-item>
-            <b-nav-item to="/about">Report</b-nav-item>
-          </b-navbar-nav>
+          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
+          <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-              <b-nav-item href="#">Sign Up</b-nav-item>
-              <b-nav-item href="#">Sign In</b-nav-item>
+              <b-nav-item to="/">Home</b-nav-item>
+              <b-nav-item to="/create"> New Expense</b-nav-item>
+              <b-nav-item to="/about">Report</b-nav-item>
             </b-navbar-nav>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
 
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      <router-link to="/create">Create</router-link>
+            <!-- Right aligned nav items -->
+            <b-navbar-nav class="ml-auto">
+              <b-navbar-nav>
+                <b-nav-item href="#">Sign Up</b-nav-item>
+                <b-nav-item href="#">Sign In</b-nav-item>
+              </b-navbar-nav>
+            </b-navbar-nav>
+          </b-collapse>
+        </b-navbar>
+      </nav>
     </div>
     <router-view />
   </div>

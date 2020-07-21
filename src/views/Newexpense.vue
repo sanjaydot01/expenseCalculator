@@ -1,23 +1,47 @@
 <template>
   <div class="home">
-    <h1>Add New Expense</h1>
     <div class="container">
-      <form @submit.prevent="addExpenses" action="">
-        <label for="example-datepicker">Choose a date</label>
-        <b-form-datepicker
-          id="example-datepicker"
-          v-model="formdate"
-          class="mb-2"
-        ></b-form-datepicker>
-        <p>Value: ' '</p>
-        <label for="">Add Items</label>
-        <input type="text" v-model="formitem" />
-        <label for="">Add Amount:</label>
-        <input type="number" v-model="formamount" />
-        <button type="submit">Add</button>
+      <form class="form-group" @submit.prevent="addExpenses" action="">
+        <div>
+          <h1 style=" display:inline-block">Add New Expense</h1>
+          <div class="form-group w-75">
+            <label for="example-datepicker">Choose a date</label>
+            <b-form-datepicker
+              id="example-datepicker"
+              v-model="formdate"
+              class="mb-2"
+            ></b-form-datepicker>
+          </div>
+          <div class="form-group w-75">
+            <label for="additems">Add Items</label>
+            <input
+              type="text"
+              v-model="formitem"
+              class="form-control "
+              placeholder="Enter items"
+            />
+          </div>
+          <div class="form-group w-75">
+            <label for="amount">Add Amount</label>
+            <input
+              type="number"
+              v-model="formamount"
+              class="form-control"
+              placeholder="Enter amount"
+            />
+          </div>
+        </div>
+        <button
+          class="btn btn-success btn-block form-group w-75 "
+          type="submit"
+        >
+          Add
+        </button>
       </form>
-
+    </div>
+    <div class="container">
       <h1>Display Result</h1>
+
       <li v-for="(expense, index) in expenses" :key="index">
         <span>{{ expense.formdate }}</span>
         <span>{{ expense.formitem }}</span>
@@ -65,13 +89,43 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+* {
+  color: black;
+}
+body {
+  opacity: 0.88;
+  background-image: url("../assets/money.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 99vh;
+  background-position: fixed;
+}
 .container {
 }
 form label {
   display: block;
+  padding: 10px;
 }
 form input {
   display: block;
+}
+#app > div.home > div:nth-child(1) > form > button {
+  margin-top: 15px;
+}
+form {
+  background-color: grey;
+  opacity: 1;
+  color: #000000;
+  padding: 80px 100px;
+  margin-top: 30px;
+  -webkit-box-shadow: 10px 10px 7px 1px rgba(0, 0, 0, 0.79);
+  -moz-box-shadow: 10px 10px 7px 1px rgba(0, 0, 0, 0.79);
+  box-shadow: 10px 10px 7px 1px rgba(0, 0, 0, 0.79);
+  border-radius: 25px 25px 25px 25px;
+  -moz-border-radius: 25px 25px 25px 25px;
+  -webkit-border-radius: 25px 25px 25px 25px;
+  border: 0px solid #000000;
 }
 </style>
