@@ -9,9 +9,9 @@
         "
         action=""
       >
-        <div>
-          <h1 style=" display:inline-block">Add New Expense</h1>
-          <div class="form-group w-75">
+        <div id="main">
+          <h1>Add New Expense</h1>
+          <div class="form-group col-auto ">
             <label for="example-datepicker">Choose a date</label>
             <b-form-datepicker
               id="example-datepicker"
@@ -19,7 +19,7 @@
               class="mb-2"
             ></b-form-datepicker>
           </div>
-          <div class="form-group w-75">
+          <div class="form-group col-auto">
             <label for="additems">Add Items</label>
             <input
               required
@@ -29,7 +29,7 @@
               placeholder="Enter items"
             />
           </div>
-          <div class="form-group w-75">
+          <div class="form-group col-auto ">
             <label for="amount">Add Amount</label>
             <input
               required
@@ -40,10 +40,7 @@
             />
           </div>
         </div>
-        <button
-          class="btn btn-success btn-block form-group w-75 "
-          type="submit"
-        >
+        <button class=" add btn btn-success " type="submit">
           Add
         </button>
         <div class="div">
@@ -106,16 +103,13 @@ export default {
 * {
   color: black;
 }
-body {
-  opacity: 0.88;
-  background-image: url("../assets/money.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  min-height: 99vh;
-  background-position: fixed;
-}
 .container {
+  margin-top: 5px;
+}
+.container form {
+  min-height: 550px;
+  height: auto;
+  width: auto;
 }
 form label {
   display: block;
@@ -128,11 +122,8 @@ form input {
   margin-top: 15px;
 }
 form {
-  background-color: rgb(190, 165, 165);
-  opacity: 1;
+  background-color: rgb(158, 146, 146);
   color: #000000;
-  padding: 80px 100px;
-  margin-top: 30px;
   -webkit-box-shadow: 10px 10px 7px 1px rgba(0, 0, 0, 0.79);
   -moz-box-shadow: 10px 10px 7px 1px rgba(0, 0, 0, 0.79);
   box-shadow: 10px 10px 7px 1px rgba(0, 0, 0, 0.79);
@@ -141,8 +132,22 @@ form {
   -webkit-border-radius: 25px 25px 25px 25px;
   border: 0px solid #000000;
 }
+
+.add {
+  text-align: center;
+  width: 80px;
+  justify-content: center;
+  margin: 5px 15px;
+  padding: 6px;
+}
+.div {
+  margin: 10px;
+}
 .div button {
   margin: 0px 5px;
-  margin-top: 15px;
+}
+#main h1{
+  text-align: center;
+  padding-top: 20px;
 }
 </style>

@@ -3,6 +3,32 @@
     <div class="title">
       <h1>Welcome to Expense Calculator</h1>
     </div>
+    <div class="datepicker">
+      <div class="datepickerbutton">
+        <button class="btn btn-warning">
+          Calculate Expense from Custom Date Here
+        </button>
+      </div>
+
+      <date-picker
+        placeholder="Select two dates"
+        v-model="range"
+        lang="en"
+        range
+        type="date"
+        width="500"
+        format="YYYY-MM-DD"
+      ></date-picker>
+      <button
+        class="btn btn-primary"
+        @click="
+          datearrays();
+          filtereddate();
+        "
+      >
+        Calculate
+      </button>
+    </div>
     <div class="content">
       <div class="card">
         <img
@@ -63,32 +89,6 @@
           <h1>Rs. {{ addcustom() }}</h1>
         </div>
       </div>
-    </div>
-    <div class="datepicker">
-      <div class="datepickerbutton">
-        <button class="btn btn-warning">
-          Calculate Expense from Custom Date Here
-        </button>
-      </div>
-
-      <date-picker
-        placeholder="Select two dates"
-        v-model="range"
-        lang="en"
-        range
-        type="date"
-        width="500"
-        format="YYYY-MM-DD"
-      ></date-picker>
-      <button
-        class="btn btn-primary"
-        @click="
-          datearrays();
-          filtereddate();
-        "
-      >
-        Calculate
-      </button>
     </div>
   </div>
 </template>
@@ -258,36 +258,36 @@ export default {
 <style>
 body {
   background-image: url("../assets/background.jpg");
-  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 </style>
 
 <style scoped>
 .title h1 {
-  margin-top: 50px;
-  font-size: 50px;
-  margin: 0 0 30px;
+  margin-bottom: 15px;
   text-transform: uppercase;
 }
 .home h1 {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .content {
   background-color: rgb(55, 55, 204);
-  margin: 30px;
   padding: 10px;
-  margin-top: 80px;
-  border: 1px solid blue;
+  border: 1px solid rgb(55, 55, 204);
   border-radius: 30px;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 15px;
+  margin:15px;
 }
 .content .card {
-  width: 18rem;
   margin: auto;
-  height: 385px;
+  width: 16rem;
+  height: 370px;
   padding: 10px;
 }
 .card-title {
@@ -299,13 +299,15 @@ body {
 .card-body {
   border: 1px solid black;
   margin-top: 10px;
+  border-radius: 10px;
+  background-color: rgb(230, 230, 74);
 }
 .card-body h1 {
   margin-top: 0px;
 }
 .datepicker {
   text-align: center;
-  margin-top: 70px;
+  margin-top: -10px;
 }
 .datepickerbutton {
   margin-bottom: 10px;

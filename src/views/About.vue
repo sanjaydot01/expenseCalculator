@@ -1,10 +1,10 @@
 <template>
   <div class="about ">
     <div class="title">
-    <h1>List of Expenses</h1>
+      <h1>List of Expenses</h1>
     </div>
 
-    <table class="table table-dark  table-hover">
+    <table class="table   table-dark  table-hover">
       <thead>
         <tr>
           <th scope="col">S.N</th>
@@ -34,8 +34,6 @@
         </tr>
       </tbody>
     </table>
-
-
   </div>
 </template>
 
@@ -80,19 +78,12 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .title h1 {
   text-align: center;
+  font-size: 25px;
   margin: 10px;
   text-transform: uppercase;
 }
-.view {
-  border-color: transparent;
-  background-color: initial;
-  color: initial;
-}
-.duplicate {
-  background-color: blueviolet;
-  display: flex;
-}
+
 </style>
