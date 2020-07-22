@@ -1,7 +1,14 @@
 <template>
   <div class="home">
     <div class="container">
-      <form class="form-group" @submit.prevent="addExpenses" action="">
+      <form
+        class="form-group"
+        @submit.prevent="
+          addExpenses();
+          alerts();
+        "
+        action=""
+      >
         <div>
           <h1 style=" display:inline-block">Add New Expense</h1>
           <div class="form-group w-75">
@@ -15,6 +22,7 @@
           <div class="form-group w-75">
             <label for="additems">Add Items</label>
             <input
+              required
               type="text"
               v-model="formitem"
               class="form-control "
@@ -24,6 +32,7 @@
           <div class="form-group w-75">
             <label for="amount">Add Amount</label>
             <input
+              required
               type="number"
               v-model="formamount"
               class="form-control"
@@ -37,16 +46,17 @@
         >
           Add
         </button>
-      </form>
-    </div>
-    <div class="container">
-      <h1>Display Result</h1>
+        <div class="div">
+          <button class="btn btn-warning">
+            <router-link to="/">Dashboard</router-link>
+          </button>
 
-      <li v-for="(expense, index) in expenses" :key="index">
-        <span>{{ expense.formdate }}</span>
-        <span>{{ expense.formitem }}</span>
-        <span>{{ expense.formamount }}</span>
-      </li>
+          <button class="btn btn-warning">
+            <router-link to="report">Report</router-link>
+          </button>
+          <router-vew />
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -85,6 +95,9 @@ export default {
   },
   methods: {
     ...mapMutations(["addExpenses", "setDate", "setItem", "setAmount"]),
+    alerts: function() {
+      alert("Data Added");
+    },
   },
 };
 </script>
@@ -115,7 +128,7 @@ form input {
   margin-top: 15px;
 }
 form {
-  background-color: grey;
+  background-color: rgb(190, 165, 165);
   opacity: 1;
   color: #000000;
   padding: 80px 100px;
@@ -127,5 +140,9 @@ form {
   -moz-border-radius: 25px 25px 25px 25px;
   -webkit-border-radius: 25px 25px 25px 25px;
   border: 0px solid #000000;
+}
+.div button {
+  margin: 0px 5px;
+  margin-top: 15px;
 }
 </style>

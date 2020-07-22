@@ -1,40 +1,30 @@
 <template>
   <div class="home">
-    <h1>Welcome to Expense Calculator</h1>
-    {{ dates() }}
+    <div class="title">
+      <h1>Welcome to Expense Calculator</h1>
+    </div>
     <div class="content">
-     <div class="card">
+      <div class="card">
         <img
           class="card-img-top"
           src="../assets/today1.jpg"
           alt="Card image cap"
         />
         <div class="card-body">
-          <p class="card-title">Today</p>
-          <h1>Rs. {{ dates() }}</h1>
-        </div>
-      </div>
-     <div class="card">
-        <img
-          class="card-img-top"
-          src="../assets/yesterday4.jpg"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <p class="card-title">Yesterday</p>
-          <h1>Rs. {{ dates() }}</h1>
+          <p class="card-title"><br />Today</p>
+          <h1>Rs. {{ todaysexpenses }}</h1>
         </div>
       </div>
 
       <div class="card">
         <img
           class="card-img-top"
-          src="../assets/seven2.jpg"
+          src="../assets/yesterday4.jpg"
           alt="Card image cap"
         />
         <div class="card-body">
-          <p class="card-title">Last 7 Days</p>
-          <h1>Rs. {{ dates() }}</h1>
+          <p class="card-title">Last 7 Days Including Today</p>
+          <h1>Rs. {{ addweeks() }}</h1>
         </div>
       </div>
 
@@ -45,8 +35,8 @@
           alt="Card image cap"
         />
         <div class="card-body">
-          <p class="card-title">Last 30 Days</p>
-          <h1>Rs. {{ dates() }}</h1>
+          <p class="card-title">Last 30 Days Including Today</p>
+          <h1>Rs. {{ addmonths() }}</h1>
         </div>
       </div>
 
@@ -57,58 +47,215 @@
           alt="Card image cap"
         />
         <div class="card-body">
-          <p class="card-title">All</p>
+          <p class="card-title"><br />All Expenses</p>
           <h1>Rs. {{ add() }}</h1>
         </div>
       </div>
-    </div>
 
-    <h2>Array Methods</h2>
-    <li v-for="(expense, index) in expenses" :key="index">
-      {{ expense.formamount }}
-    </li>
-    <h5>Total Here:{{ add() }}</h5>
+      <div class="card">
+        <img
+          class="card-img-top"
+          src="../assets/seven.jpg"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <p class="card-title"><br />Custom Select</p>
+          <h1>Rs. {{ addcustom() }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="datepicker">
+      <div class="datepickerbutton">
+        <button class="btn btn-warning">
+          Calculate Expense from Custom Date Here
+        </button>
+      </div>
+
+      <date-picker
+        placeholder="Select two dates"
+        v-model="range"
+        lang="en"
+        range
+        type="date"
+        width="500"
+        format="YYYY-MM-DD"
+      ></date-picker>
+      <button
+        class="btn btn-primary"
+        @click="
+          datearrays();
+          filtereddate();
+        "
+      >
+        Calculate
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import { formatISO, subDays } from "date-fns";
+import { eachDayOfInterval } from "date-fns";
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
+
 import { mapState } from "vuex";
 export default {
   name: "Home",
   data() {
-    return {};
+    return {
+      date: "",
+      range: "",
+      final: [],
+      filteredexpense: [],
+      weeksarray: [],
+      filteredweeks: [],
+      monthsarray: [],
+      filteredmonths: [],
+      today: formatISO(new Date(new Date()), {
+        representation: "date",
+      }),
+      lastweekdateun: subDays(new Date(new Date()), 6),
+      lastmonthdateun: subDays(new Date(new Date()), 30),
+    };
   },
   computed: {
     ...mapState(["expenses"]),
+    todaysexpenses: function() {
+      let x = this.expenses.filter((expense) => {
+        return expense.formdate == this.today;
+      });
+      let total = x.reduce((currenttotal, expense) => {
+        return currenttotal + +expense.formamount;
+      }, 0);
+      return total;
+    },
+  },
+  beforeMount() {
+    this.lastweek(),
+      this.filtered(),
+      this.addweeks(),
+      this.lastmonth(),
+      this.fill(),
+      this.addmonths();
+  },
+  components: {
+    DatePicker,
   },
 
   methods: {
+    //add all
     add: function() {
       const total = this.expenses.reduce((currenttotal, expense) => {
         return currenttotal + +expense.formamount;
       }, 0);
       return total;
     },
-    dates: function() {
-      var date = new Date();
 
-      console.log(date.toISOString());
-
-      date.setDate(date.getDate() + 7);
-      const filtereditems = this.expenses.filter((expense) => {
-        return expense.formdate <= date.toISOString();
+    //datepicker dates in array
+    datearrays: function() {
+      var startdate = this.range[0];
+      var enddate = this.range[1];
+      var result = eachDayOfInterval({
+        start: new Date(startdate),
+        end: new Date(enddate),
       });
-      console.log(filtereditems);
+      this.final = result.map((resultDate) => {
+        return formatISO(new Date(resultDate), { representation: "date" });
+      });
+    },
 
-      const total7 = filtereditems.reduce((currenttotal, expense) => {
+    //filter date picker date and match with expense formdate
+    filtereddate: function() {
+      this.filteredexpense = this.expenses.filter((expense) => {
+        console.log(expense.formdate);
+        return this.final.find((abc) => {
+          return abc == expense.formdate;
+        });
+      });
+      console.log(this.filteredexpense);
+    },
+
+    //add formamount of customdate
+    addcustom: function() {
+      const customadd = this.filteredexpense.reduce((currenttotal, expense) => {
         return currenttotal + +expense.formamount;
       }, 0);
-      return total7;
+      return customadd;
     },
+
+    //put last week dates in array
+    lastweek: function() {
+      const lastweekdateformatted = formatISO(new Date(this.lastweekdateun), {
+        representation: "date",
+      });
+      console.log(lastweekdateformatted);
+      var weeks = eachDayOfInterval({
+        start: new Date(lastweekdateformatted),
+        end: new Date(this.today),
+      });
+
+      this.weeksarray = weeks.map((wee) => {
+        return formatISO(new Date(wee), { representation: "date" });
+      });
+    },
+    //filter last week date and match with expense formdate
+    filtered: function() {
+      this.filteredweeks = this.expenses.filter((expense) => {
+        console.log(expense.formdate);
+        return this.weeksarray.find((def) => {
+          return def == expense.formdate;
+        });
+      });
+      console.log(this.filteredweeks);
+    },
+    //add weeks amount in weeks
+    addweeks: function() {
+      const weeksadd = this.filteredweeks.reduce((currenttotal, expense) => {
+        return currenttotal + +expense.formamount;
+      }, 0);
+      return weeksadd;
+    },
+
+    //months
+    //put last months dates in array
+    lastmonth: function() {
+      const lastmonthdateformatted = formatISO(new Date(this.lastmonthdateun), {
+        representation: "date",
+      });
+      console.log(lastmonthdateformatted);
+      var months = eachDayOfInterval({
+        start: new Date(lastmonthdateformatted),
+        end: new Date(this.today),
+      });
+
+      this.monthsarray = months.map((dee) => {
+        return formatISO(new Date(dee), { representation: "date" });
+      });
+    },
+    //filter last month date and match with expense formdate
+    fill: function() {
+      this.filteredmonths = this.expenses.filter((expense) => {
+        console.log(expense.formdate);
+        return this.monthsarray.find((ghi) => {
+          return ghi == expense.formdate;
+        });
+      });
+      console.log(this.filteredweeks);
+    },
+    //add months amount in months
+    addmonths: function() {
+      const monthsadd = this.filteredmonths.reduce((currenttotal, expense) => {
+        return currenttotal + +expense.formamount;
+      }, 0);
+      return monthsadd;
+    },
+
+    //months
   },
 };
 </script>
-<style scoped>
+<style>
 body {
   background-image: url("../assets/background.jpg");
   background-size: cover;
@@ -117,22 +264,30 @@ body {
 </style>
 
 <style scoped>
+.title h1 {
+  margin-top: 50px;
+  font-size: 50px;
+  margin: 0 0 30px;
+  text-transform: uppercase;
+}
 .home h1 {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .content {
-  background-color: blue;
+  background-color: rgb(55, 55, 204);
   margin: 30px;
   padding: 10px;
+  margin-top: 80px;
+  border: 1px solid blue;
+  border-radius: 30px;
   display: flex;
   flex-wrap: wrap;
 }
 .content .card {
-
   width: 18rem;
-  background-color: coral;
   margin: auto;
+  height: 385px;
   padding: 10px;
 }
 .card-title {
@@ -144,5 +299,18 @@ body {
 .card-body {
   border: 1px solid black;
   margin-top: 10px;
+}
+.card-body h1 {
+  margin-top: 0px;
+}
+.datepicker {
+  text-align: center;
+  margin-top: 70px;
+}
+.datepickerbutton {
+  margin-bottom: 10px;
+}
+.card img {
+  height: 180px;
 }
 </style>

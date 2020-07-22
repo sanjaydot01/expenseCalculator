@@ -1,24 +1,10 @@
 <template>
   <div class="about ">
+    <div class="title">
     <h1>List of Expenses</h1>
-    <date-picker
-      v-model="range"
-      lang="en"
-      range
-      type="date"
-      width="500"
-      format="YYYY-MM-DD"
-    ></date-picker>
-    <button @click="datearrays()">Calculate</button>
-    <button @click="filtereddate()">Filter</button>
+    </div>
 
-    <hr />
-    <li v-for="(rang, index) in range" :key="index">{{ rang }}</li>
-    <hr />
-    <h5>Date FNS</h5>
-    <hr />
-
-    <table class="table">
+    <table class="table table-dark  table-hover">
       <thead>
         <tr>
           <th scope="col">S.N</th>
@@ -49,34 +35,22 @@
       </tbody>
     </table>
 
-    <hr />
-    <h2>Original</h2>
-    <li v-for="(expense, index) in expenses" :key="index">
-      <span>{{ expense.formdate }} </span>
-      <span>{{ expense.formitem }}</span>
-      <span>{{ expense.formamount }}</span>
-      <button v-on:click="editMe(expense)">Edit</button>
-      <button v-on:click="deleteMe(expense)">Delete</button>
-    </li>
+
   </div>
 </template>
 
 <script>
 import { formatISO } from "date-fns";
 import { eachDayOfInterval } from "date-fns";
-import DatePicker from "vue2-datepicker";
-import "vue2-datepicker/index.css";
 import { mapMutations, mapState } from "vuex";
 export default {
   data() {
     return {
       date: "",
-      range: "",
+      final: [],
     };
   },
-  components: {
-    DatePicker,
-  },
+
   computed: {
     ...mapState(["expenses"]),
   },
@@ -90,16 +64,16 @@ export default {
         start: new Date(startdate),
         end: new Date(enddate),
       });
-
-      const final = result.map((resultDate) => {
+      this.final = result.map((resultDate) => {
         return formatISO(new Date(resultDate), { representation: "date" });
       });
-      console.log(final);
     },
     filtereddate: function() {
       const filteredexpense = this.expenses.filter((expense) => {
-       console.log(expense.formdate);
-       return expense.formdate == "2020-07-05";
+        console.log(expense.formdate);
+        return this.final.find((abc) => {
+          return abc == expense.formdate;
+        });
       });
       console.log(filteredexpense);
     },
@@ -107,6 +81,11 @@ export default {
 };
 </script>
 <style>
+.title h1 {
+  text-align: center;
+  margin: 10px;
+  text-transform: uppercase;
+}
 .view {
   border-color: transparent;
   background-color: initial;

@@ -27,6 +27,7 @@ export default new Vuex.Store({
         formitem: state.formitem,
         formamount: state.formamount,
       });
+      (state.formdate = ""), (state.formitem = ""), (state.formamount = "");
     },
     deleteMe(state, expense) {
       const deleteIndex = state.expenses.indexOf(expense);

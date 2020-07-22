@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div >
+    <div>
       <div class="topnavbar">
         <h5>sanjay.rayamajhee80@gmail.com</h5>
       </div>
@@ -15,10 +15,10 @@
             <b-navbar-nav>
               <b-nav-item to="/">Home</b-nav-item>
               <b-nav-item to="/create"> New Expense</b-nav-item>
-              <b-nav-item to="/about">Report</b-nav-item>
+              <b-nav-item to="/report">Report</b-nav-item>
             </b-navbar-nav>
 
-            <!-- Right aligned nav items -->
+            <!-- Right aligned nav items not working -->
             <b-navbar-nav class="ml-auto">
               <b-navbar-nav>
                 <b-nav-item href="#">Sign Up</b-nav-item>
