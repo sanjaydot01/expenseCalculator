@@ -51,7 +51,7 @@
           <button class="btn btn-warning">
             <router-link to="report">Report</router-link>
           </button>
-          <router-vew />
+          <router-view />
         </div>
       </form>
     </div>

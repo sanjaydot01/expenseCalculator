@@ -257,11 +257,14 @@ export default {
 </script>
 <style>
 body {
-  background-image: url("../assets/background.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(117, 137, 12, 1) 0%,
+    rgba(117, 137, 12, 1) 37%,
+    rgba(164, 179, 87, 1) 45%,
+    rgba(164, 179, 87, 1) 91%
+  );
 }
 </style>
 
@@ -269,26 +272,27 @@ body {
 .title h1 {
   margin-bottom: 15px;
   text-transform: uppercase;
+  font-size: 32px;
 }
 .home h1 {
   text-align: center;
   margin-top: 20px;
 }
 .content {
-  background-color: rgb(55, 55, 204);
   padding: 10px;
-  border: 1px solid rgb(55, 55, 204);
   border-radius: 30px;
   display: flex;
   flex-wrap: wrap;
   margin-top: 15px;
-  margin:15px;
+  margin: 15px;
 }
 .content .card {
   margin: auto;
+  margin-bottom: 20px;
   width: 16rem;
   height: 370px;
   padding: 10px;
+  border: 1px solid black;
 }
 .card-title {
   text-align: center;
@@ -304,6 +308,7 @@ body {
 }
 .card-body h1 {
   margin-top: 0px;
+  font-size: 2rem;
 }
 .datepicker {
   text-align: center;
@@ -313,6 +318,8 @@ body {
   margin-bottom: 10px;
 }
 .card img {
+  border: 1px solid black;
+  border-radius: 10px;
   height: 180px;
 }
 </style>
